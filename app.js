@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const router = require('./routes');
-const { createUser, login } = require('./controllers/users');
+const { createUser, login, signout } = require('./controllers/users');
 // eslint-disable-next-line import/order
 const { celebrate, Joi, errors } = require('celebrate');
 const errorHandler = require('./middlewares/error');
@@ -33,6 +33,8 @@ app.post('/signup', celebrate({
     password: Joi.string().required(),
   }),
 }), createUser);
+
+app.post('/signout', signout);
 
 app.use(router);
 app.use(errorLogger);

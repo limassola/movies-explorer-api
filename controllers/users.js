@@ -61,9 +61,14 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const signout = (req, res) => {
+  res.clearCookie('jwt').status(200).send({ message: 'Выход успешен' });
+};
+
 module.exports = {
   getUserInfo,
   updateUserProfile,
   createUser,
   login,
+  signout,
 };
