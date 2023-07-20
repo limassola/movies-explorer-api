@@ -8,6 +8,7 @@ const { createUser, login, signout } = require('./controllers/users');
 const { celebrate, Joi, errors } = require('celebrate');
 const errorHandler = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const corsMiddleware = require('./middlewares/cors');
 
 const app = express();
 
@@ -15,6 +16,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
   useNewUrlParser: true,
 });
 
+app.use(corsMiddleware);
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
