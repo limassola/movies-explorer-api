@@ -48,7 +48,7 @@ const login = (req, res, next) => {
             // eslint-disable-next-line dot-notation
             }, process.env['JWT_SECRET']);
             res.cookie('jwt', jwt, {
-              maxAge: 36000,
+              maxAge: 3600000 * 24 * 7,
               httpOnly: true,
               sameSite: true,
             });
