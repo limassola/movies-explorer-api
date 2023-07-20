@@ -1,5 +1,6 @@
 // Создание схемы фильмов
 const mongoose = require('mongoose');
+const isUrl = require('validator/lib/isURL');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -25,14 +26,26 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
+    validate: {
+      validator: (value) => isUrl(value),
+      message: 'Неправильный URL для картинки',
+    },
   },
   trailerLink: {
     type: String,
     required: true,
+    validate: {
+      validator: (value) => isUrl(value),
+      message: 'Неправильный URL для трейлера',
+    },
   },
   thumbnail: {
     type: String,
     required: true,
+    validate: {
+      validator: (value) => isUrl(value),
+      message: 'Неправильный URL для фильма',
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
