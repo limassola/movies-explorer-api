@@ -32,10 +32,6 @@ const createUser = (req, res, next) => {
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
-  // if (!email || !password) {
-  //   res.status(401).send({ message: 'Введите данные' });
-  // }
-
   User.findOne({ email })
     .select('+password')
     .orFail(() => new InvalidAuth())
@@ -52,7 +48,7 @@ const login = (req, res, next) => {
               httpOnly: true,
               sameSite: true,
             });
-            res.send(user.toJSON());
+            res.send({ data: user.toJSON(), token: jwt });
           } else {
             next();
           }
