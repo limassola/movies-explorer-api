@@ -1,5 +1,5 @@
 const allowedCors = [
-  'localhost:3000',
+  'http://localhost:3001',
   // Вписать домены для диплома
 ];
 
@@ -9,7 +9,7 @@ const corsMiddleware = (req, res, next) => {
   // Проверяем, является ли источник запроса разрешенным
   if (allowedCors.includes(origin)) {
     // Устанавливаем заголовки CORS для разрешенного источника
-    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Origin', allowedCors.join(', '));
     res.header('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Credentials', 'true'); // Добавляем этот заголовок для разрешения передачи куки с установленным флагом HttpOnly

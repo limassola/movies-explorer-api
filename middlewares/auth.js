@@ -4,12 +4,14 @@ const InvalidAuth = require('../errors/invalid-auth');
 
 // eslint-disable-next-line consistent-return
 const auth = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const { authorization } = req.headers;
   let payload;
-  if (!token) {
+  if (!authorization || !authorization.startsWith('Bearer ')) {
     const error = new InvalidAuth('Требуется авторизация');
     return next(error);
   }
+
+  const token = authorization.replace('Bearer ', '');
 
   try {
     // eslint-disable-next-line dot-notation
