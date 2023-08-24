@@ -27,7 +27,7 @@ const deleteMovieById = (req, res, next) => {
       if (!movie.owner.equals(req.user._id)) {
         throw new ForbiddenError('Недостаточно прав для удаления фильма.');
       }
-      return Movie.findByIdAndDelete(req.params.cardId);
+      return Movie.findByIdAndDelete(req.params.movieId);
     })
     .then(() => {
       res.status(200).send({ message: 'Карточка успешно удалена' });
